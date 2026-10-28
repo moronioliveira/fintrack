@@ -1,7 +1,15 @@
+import { CardsResumo } from "@/components/cardResumo";
+import { TransacoesHeader } from "@/components/header/transacoesHeader";
+import { ChartPie, TrendingDown, TrendingUp, Wallet } from "lucide-react";
+
 export default function Transacoes(){
+
+    
+
     return(
-        <div>
-            <h1>Pagina de transações</h1>
+        <div className="flex flex-col gap-5">
+            <TransacoesHeader/>
+            <CardsResumo/>
         </div>
     )
 }

@@ -1,15 +1,9 @@
 import { BriefcaseBusiness, ChartPie, ShoppingCart, TrendingDown, TrendingUp, Wallet } from "lucide-react";
+import { CardsResumo } from "../cardResumo";
 
 export function Grid() {
-    // 1. Dados dos Cards de Resumo
-    const summaryCards = [
-        { title: "Saldo atual", value: "R$ 3.250", icon: Wallet, iconColor: "text-blue-500" },
-        { title: "Receitas", value: "R$ 4.000", icon: TrendingUp, iconColor: "text-emerald-500" },
-        { title: "Despesas", value: "R$ 750", icon: TrendingDown, iconColor: "text-rose-500" },
-        { title: "Categorias", value: "5", icon: ChartPie, iconColor: "text-purple-500" },
-    ];
 
-    // 2. Dados das Últimas Transações
+    // 1. Dados das Últimas Transações
     const latestTransactions = [
         {
             title: "Supermercado",
@@ -34,20 +28,9 @@ export function Grid() {
             <div className="grid grid-cols-2 gap-5 text-white w-full">
                 
                 {/* Renderização dinâmica dos cartões de saldo/resumo */}
-                {summaryCards.map((card, index) => {
-                    const Icon = card.icon;
-                    return (
-                        <div 
-                            key={index} 
-                            className="flex flex-col text-gray-300 border border-zinc-800 p-4 rounded-xl gap-2 bg-zinc-900/30"
-                        >
-                            <Icon size={18} className={card.iconColor} />
-                            <span className="text-sm text-zinc-400">{card.title}</span>
-                            <span className="text-white font-bold text-xl">{card.value}</span>
-                        </div>
-                    );
-                })}
-
+                    <div className="col-span-2">
+                        <CardsResumo/>
+                    </div>
                 {/* Bloco de Últimas Transações */}
                 <div className="flex flex-col text-gray-300 col-span-2 border border-zinc-800 p-4 rounded-xl gap-4 bg-zinc-900/30">
                     <span className="font-bold text-white text-lg">Últimas transações</span>

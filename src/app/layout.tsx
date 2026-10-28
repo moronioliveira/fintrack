@@ -13,12 +13,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-br">
       <body className="min-h-screen flex flex-col w-full bg-[#121212] text-white">
+
+        {/* O Header agora vai herdar o alinhamento exato das bordas */}
+          <Header />
         
         {/* Contêiner mestre que centraliza e limita a largura de TUDO na tela uniformemente */}
-        <div className="w-full max-w-7xl mx-auto px-4">
-          
-          {/* O Header agora vai herdar o alinhamento exato das bordas */}
-          <Header />
+        <div className="w-full max-w-8xl mx-auto px-4">
           
           {/* Estrutura inferior lado a lado */}
           <div className="flex w-full mt-8 gap-10 items-start">
