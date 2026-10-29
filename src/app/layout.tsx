@@ -2,40 +2,29 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Navigation } from "@/components/header/navigation";
+import { TransactionsProvider } from "@/contexts/transactions-context";
 
 
 export const metadata: Metadata = {
   title: "FinTrack",
-  description: "Seu app de finanças pessoais",
+  description: "Controle suas finanças pessoais com clareza",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-br">
-      <body className="min-h-screen flex flex-col w-full bg-[#121212] text-white">
-
-        {/* O Header agora vai herdar o alinhamento exato das bordas */}
+      <body className="min-h-screen w-full">
+        <TransactionsProvider>
           <Header />
-        
-        {/* Contêiner mestre que centraliza e limita a largura de TUDO na tela uniformemente */}
-        <div className="w-full max-w-8xl mx-auto px-4">
-          
-          {/* Estrutura inferior lado a lado */}
-          <div className="flex w-full mt-8 gap-10 items-start">
-            
-            {/* Menu com tamanho fixo ideal */}
-            <aside className="min-w-60 shrink-0">
+          <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-4 py-6 sm:px-6 lg:flex-row lg:gap-10 lg:px-8 lg:py-8">
+            <aside className="shrink-0 lg:w-56">
               <Navigation />
             </aside>
-
-            {/* Conteúdo do dashboard esticando até colar na ponta direita do Header */}
-            <main className="flex-1">
+            <main className="min-w-0 flex-1">
               {children}
             </main>
-
           </div>
-        </div>
-
+        </TransactionsProvider>
       </body>
     </html>
   );

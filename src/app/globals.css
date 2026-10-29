@@ -1,2 +1,27 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background:
+    radial-gradient(circle at 70% -10%, rgba(37, 99, 235, 0.14), transparent 34rem),
+    #090d16;
+  color: #f8fafc;
+}
+
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
