@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowLeftRight, Bolt, LayoutDashboard, Tags } from "lucide-react";
+import { ArrowLeftRight, Bolt, CalendarClock, LayoutDashboard, Tags, Target, WalletCards } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -12,6 +12,9 @@ export function Navigation(){
         { name: "Dashboard", href: "/", icon: LayoutDashboard },
         { name: "Transações", href: "/transacoes", icon: ArrowLeftRight },
         { name: "Categorias", href: "/categorias", icon: Tags },
+        { name: "Planejamento", href: "/planejamento", icon: Target },
+        { name: "Orçamentos", href: "/orcamentos", icon: WalletCards },
+        { name: "Contas", href: "/contas", icon: CalendarClock },
         { name: "Configurações", href: "/configuracoes", icon: Bolt },
     ];
 
