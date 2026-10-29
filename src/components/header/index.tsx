@@ -1,16 +1,27 @@
 import { Wallet } from "lucide-react";
 import Link from "next/link";
 
-
 export function Header(){
-    return(
-        <header className="w-full max-w-7xl min-h-5 bg-blue-900 mx-auto mt-2 rounded-xl p-3">
-            <h1 className=" flex gap-2 items-center text-white font-bold text-2xl">
-                <Wallet size={26} color="rgb(0, 165, 241)"/>
-                 <Link href="/">FinTrack</Link>
-            </h1>
-            <p className="text-white mt-2">Controle financeiro pessoal</p>
-        </header>
-
-    )
+  return (
+    <header className="border-b border-white/[0.06] bg-[#0d1320]/90 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <Link href="/" className="flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/15 text-blue-400 ring-1 ring-blue-400/20">
+            <Wallet size={21} />
+          </span>
+          <span>
+            <strong className="block text-lg tracking-tight text-white">FinTrack</strong>
+            <span className="hidden text-xs text-slate-500 sm:block">Seu dinheiro, no controle</span>
+          </span>
+        </Link>
+        <div className="hidden items-center gap-3 sm:flex">
+          <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.7)]" />
+          <span className="text-xs font-medium text-slate-400">Tudo em ordem</span>
+          <div className="ml-3 flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-sm font-bold text-slate-300 ring-1 ring-white/10">
+            U
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 }

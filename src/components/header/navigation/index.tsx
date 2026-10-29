@@ -16,8 +16,9 @@ export function Navigation(){
     ];
 
     return (
-        <div>
-            <ul className="text-white flex flex-col gap-2">
+        <nav className="lg:sticky lg:top-6">
+            <p className="mb-3 hidden px-3 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-600 lg:block">Menu principal</p>
+            <ul className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible">
                 {navLinks.map((link) => {
                     const Icon = link.icon;
                     // Verifica se o link é a página atual
@@ -27,10 +28,10 @@ export function Navigation(){
                         <li key={link.href}>
                             <Link 
                                 href={link.href}
-                                className={`flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
+                                className={`flex min-w-max items-center gap-3 rounded-xl px-3.5 py-3 text-sm transition-all duration-200 ${
                                     isActive 
-                                        ? "bg-sky-500/10 text-sky-400 font-semibold" // Ativo
-                                        : "text-zinc-400 hover:text-white hover:bg-zinc-800/50" // Normal / Hover
+                                        ? "bg-blue-500/15 font-semibold text-blue-300 ring-1 ring-blue-400/15"
+                                        : "text-slate-500 hover:bg-white/[0.04] hover:text-slate-200"
                                 }`}
                             >
                                 <Icon size={18} /> 
@@ -40,6 +41,6 @@ export function Navigation(){
                     );
                 })}
             </ul>
-        </div>
+        </nav>
     );
 }
