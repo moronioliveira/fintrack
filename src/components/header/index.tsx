@@ -15,8 +15,9 @@ export function Header(){
           </span>
         </Link>
         <div className="hidden items-center gap-3 sm:flex">
-          <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.7)]" />
-          <span className="text-xs font-medium text-slate-400">Tudo em ordem</span>
+          <span className="rounded-lg border border-blue-400/15 bg-blue-400/10 px-3 py-1.5 text-xs font-medium text-blue-300">
+            Sessão local
+          </span>
           <div className="ml-3 flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-sm font-bold text-slate-300 ring-1 ring-white/10">
             U
           </div>
