@@ -48,7 +48,7 @@ npm install
 npm run dev
 ```
 
-Acesse ([http://localhost:3000](https://fintrack-three-lovat.vercel.app/)).
+Acesse ([FinTrack](https://fintrack-three-lovat.vercel.app/)).
 
 ## Validação
 
