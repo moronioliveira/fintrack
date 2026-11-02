@@ -1,7 +1,26 @@
+"use client";
+
 import { Wallet } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-export function Header(){
+type User = { name: string; email: string };
+
+export function Header() {
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    fetch("/api/auth/me").then((response) => response.ok ? response.json() : null).then((result) => setUser(result?.user ?? null));
+  }, []);
+
+  async function logout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.replace("/login");
+    router.refresh();
+  }
+
   return (
     <header className="border-b border-white/[0.06] bg-[#0d1320]/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
@@ -15,12 +34,9 @@ export function Header(){
           </span>
         </Link>
         <div className="hidden items-center gap-3 sm:flex">
-          <span className="rounded-lg border border-blue-400/15 bg-blue-400/10 px-3 py-1.5 text-xs font-medium text-blue-300">
-            Sessão local
-          </span>
-          <div className="ml-3 flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-sm font-bold text-slate-300 ring-1 ring-white/10">
-            U
-          </div>
+          {user && <span className="rounded-lg border border-blue-400/15 bg-blue-400/10 px-3 py-1.5 text-xs font-medium text-blue-300">{user.name}</span>}
+          {user && <button type="button" onClick={logout} className="ml-1 text-xs text-slate-500 hover:text-white">Sair</button>}
+          <div className="ml-3 flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-sm font-bold text-slate-300 ring-1 ring-white/10">{user?.name.charAt(0).toUpperCase() ?? "?"}</div>
         </div>
       </div>
     </header>

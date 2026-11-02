@@ -15,6 +15,9 @@
 
 # next.js
 /.next/
+.env
+dev.db
+dev.db-journal/
 /out/
 
 # production
