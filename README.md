@@ -51,6 +51,10 @@ npm run dev
 
 Copie `.env.example` para `.env` e informe a URL do PostgreSQL antes de executar as migrações. Em produção, use `npm run db:deploy` em vez de `npm run db:migrate`.
 
+### Deploy seguro
+
+No provedor de hospedagem, configure `DATABASE_URL` e `SESSION_SECRET` como variáveis protegidas do ambiente de produção. Não envie `.env` para o Git. Antes do primeiro deploy, aplique as migrações a partir de um ambiente confiável com `npm run db:deploy`; o build da Vercel não executa migrações automaticamente. O workflow do GitHub valida lint e build em cada push e pull request para `developer` e `main`.
+
 Acesse ([FinTrack](https://fintrack-three-lovat.vercel.app/)).
 
 ## Validação
