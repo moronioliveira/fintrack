@@ -39,14 +39,17 @@ src/
 └── types/        # Tipos do domínio financeiro
 ```
 
-O `TransactionsProvider` funciona como fonte única de dados para transações, categorias, contas, metas e orçamentos. Nesta versão, os dados ficam em memória durante a sessão; persistência, autenticação e integração com API são próximos passos naturais do projeto.
+O `TransactionsProvider` funciona como fonte única de dados para transações, categorias, contas, metas e orçamentos. Os dados são persistidos por usuário em PostgreSQL via Prisma, e o acesso é protegido por sessão httpOnly assinada. Para produção, defina `DATABASE_URL` e `SESSION_SECRET` no ambiente de execução.
 
 ## Executando localmente
 
 ```bash
 npm install
+npm run db:migrate
 npm run dev
 ```
+
+Copie `.env.example` para `.env` e informe a URL do PostgreSQL antes de executar as migrações. Em produção, use `npm run db:deploy` em vez de `npm run db:migrate`.
 
 Acesse ([FinTrack](https://fintrack-three-lovat.vercel.app/)).
 

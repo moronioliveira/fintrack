@@ -6,8 +6,11 @@ import {
   useContext,
   useMemo,
   useState,
+  useEffect,
+  useRef,
   type ReactNode,
 } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import type { NewTransaction, Transaction } from "@/types/transaction";
 import type { Category } from "@/types/category";
 import type {
@@ -18,6 +21,7 @@ import type {
   Budget,
   NewBudget,
 } from "@/types/financial-planning";
+import { defaultData, type PersistedData } from "@/lib/default-data";
 
 type TransactionsContextValue = {
   transacoes: Transaction[];
@@ -48,20 +52,51 @@ const TransactionsContext = createContext<TransactionsContextValue | null>(
 );
 
 export function TransactionsProvider({ children }: { children: ReactNode }) {
-  const [transacoes, setTransacoes] = useState<Transaction[]>([]);
-  const [categorias, setCategorias] = useState<Category[]>([
-    { id: "alimentacao", name: "Alimentação", icon: "Utensils" },
-    { id: "moradia", name: "Moradia", icon: "House" },
-    { id: "transporte", name: "Transporte", icon: "Car" },
-    { id: "saude", name: "Saúde", icon: "HeartPulse" },
-    { id: "educacao", name: "Educação", icon: "GraduationCap" },
-    { id: "lazer", name: "Lazer", icon: "Gamepad2" },
-    { id: "compras", name: "Compras", icon: "ShoppingBag" },
-    { id: "salario", name: "Salário", icon: "BriefcaseBusiness" },
-  ]);
-  const [contasRecorrentes, setContasRecorrentes] = useState<RecurringBill[]>([]);
-  const [metasFinanceiras, setMetasFinanceiras] = useState<FinancialGoal[]>([]);
-  const [orcamentos, setOrcamentos] = useState<Budget[]>([]);
+  const pathname = usePathname();
+  const router = useRouter();
+  const [transacoes, setTransacoes] = useState<Transaction[]>(defaultData.transacoes);
+  const [categorias, setCategorias] = useState<Category[]>(defaultData.categorias);
+  const [contasRecorrentes, setContasRecorrentes] = useState<RecurringBill[]>(defaultData.contasRecorrentes);
+  const [metasFinanceiras, setMetasFinanceiras] = useState<FinancialGoal[]>(defaultData.metasFinanceiras);
+  const [orcamentos, setOrcamentos] = useState<Budget[]>(defaultData.orcamentos);
+  const carregado = useRef(false);
+
+  useEffect(() => {
+    if (pathname === "/login") return;
+    fetch("/api/data")
+      .then(async (response) => {
+        if (response.status === 401) {
+          router.replace("/login");
+          return null;
+        }
+        if (!response.ok) throw new Error("Falha ao carregar os dados financeiros.");
+        return response.json() as Promise<PersistedData>;
+      })
+      .then((data) => {
+        if (!data) return;
+        setTransacoes(data.transacoes);
+        setCategorias(data.categorias);
+        setContasRecorrentes(data.contasRecorrentes);
+        setMetasFinanceiras(data.metasFinanceiras);
+        setOrcamentos(data.orcamentos);
+        carregado.current = true;
+      })
+      .catch(() => {
+        router.replace("/login");
+      });
+  }, [pathname, router]);
+
+  useEffect(() => {
+    if (!carregado.current || pathname === "/login") return;
+    const timeout = window.setTimeout(() => {
+      void fetch("/api/data", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ transacoes, categorias, contasRecorrentes, metasFinanceiras, orcamentos }),
+      });
+    }, 250);
+    return () => window.clearTimeout(timeout);
+  }, [pathname, transacoes, categorias, contasRecorrentes, metasFinanceiras, orcamentos]);
 
   const adicionarTransacao = useCallback((transacao: NewTransaction) => {
     setTransacoes((transacoesAtuais) => [
