@@ -45,27 +45,7 @@ export function Dashboard() {
                 <p className="mt-2 text-sm text-slate-500">Aqui está um resumo da sua vida financeira.</p>
             </header>
             <CardsResumo transacoes={transacoes} categorias={categorias}/>
-            <FluxoCaixa transacoes={transacoes} />
-            <div className="grid gap-5 xl:grid-cols-2">
-                <DistribuicaoDespesas transacoes={transacoes} />
-                <Orcamentos budgets={orcamentos} transactions={transacoes} />
-                <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-5 shadow-2xl shadow-black/10 sm:p-6">
-                    <div className="mb-5 flex items-center justify-between">
-                        <div>
-                            <h2 className="text-lg font-bold text-white">Insights rápidos</h2>
-                            <p className="mt-1 text-xs text-slate-500">Indicadores para acompanhar seu ritmo</p>
-                        </div>
-                        <Activity className="text-emerald-400" size={20} />
-                    </div>
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                        <div className="rounded-xl bg-white/[0.04] p-3"><ReceiptText className="mb-2 text-blue-400" size={18} /><p className="text-xs text-slate-500">Transações</p><strong className="text-lg text-white">{transacoes.length}</strong></div>
-                        <div className="rounded-xl bg-white/[0.04] p-3"><Target className="mb-2 text-rose-400" size={18} /><p className="text-xs text-slate-500">Maior despesa</p><strong className="break-words text-lg text-white">{moeda(maiorDespesa)}</strong></div>
-                        <div className="rounded-xl bg-white/[0.04] p-3"><Calculator className="mb-2 text-amber-400" size={18} /><p className="text-xs text-slate-500">Média por despesa</p><strong className="break-words text-lg text-white">{moeda(mediaDespesas)}</strong></div>
-                        <div className="rounded-xl bg-white/[0.04] p-3 sm:col-span-2"><p className="text-xs text-slate-500">Última movimentação</p><strong className="break-words text-sm text-white">{ultimaTransacao ? `${ultimaTransacao.description} · ${moeda(Math.abs(ultimaTransacao.value))}` : "Nenhuma transação cadastrada"}</strong></div>
-                    </div>
-                </section>
-                <BalancoFinanceiro transacoes={transacoes} />
-                <div className="col-span-full grid gap-5 xl:grid-cols-2">
+            <div className="col-span-full grid gap-5 xl:grid-cols-2">
                     <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-5 shadow-2xl shadow-black/10 sm:p-6">
                         <div className="flex items-center justify-between"><div><h2 className="text-lg font-bold text-white">Contas recorrentes</h2><p className="mt-1 text-xs text-slate-500">Compromissos pendentes neste mês</p></div><CalendarClock className="text-amber-400" size={20} /></div>
                         <p className="mt-5 text-2xl font-bold text-white">{moeda(contasPendentes.reduce((total, conta) => total + conta.value, 0))}</p>
@@ -92,6 +72,27 @@ export function Dashboard() {
                         {metasFinanceiras.length ? <div className="mt-5 space-y-3">{metasFinanceiras.slice(0, 2).map((meta) => <div key={meta.id}><div className="mb-1 flex justify-between text-xs"><span className="truncate text-slate-300">{meta.name}</span><span className="text-slate-500">{Math.min((meta.currentValue / meta.targetValue) * 100, 100).toFixed(0)}%</span></div><div className="h-2 overflow-hidden rounded-full bg-white/[0.07]"><div className="h-full rounded-full bg-blue-500" style={{ width: `${Math.min((meta.currentValue / meta.targetValue) * 100, 100)}%` }} /></div></div>)}</div> : <p className="mt-5 text-sm text-slate-500">Crie uma meta para acompanhar seu progresso.</p>}
                     </section>
                 </div>
+            <FluxoCaixa transacoes={transacoes} />
+            <div className="grid gap-5 xl:grid-cols-2">
+                <DistribuicaoDespesas transacoes={transacoes} />
+                <Orcamentos budgets={orcamentos} transactions={transacoes} />
+                <section className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-5 shadow-2xl shadow-black/10 sm:p-6">
+                    <div className="mb-5 flex items-center justify-between">
+                        <div>
+                            <h2 className="text-lg font-bold text-white">Insights rápidos</h2>
+                            <p className="mt-1 text-xs text-slate-500">Indicadores para acompanhar seu ritmo</p>
+                        </div>
+                        <Activity className="text-emerald-400" size={20} />
+                    </div>
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        <div className="rounded-xl bg-white/[0.04] p-3"><ReceiptText className="mb-2 text-blue-400" size={18} /><p className="text-xs text-slate-500">Transações</p><strong className="text-lg text-white">{transacoes.length}</strong></div>
+                        <div className="rounded-xl bg-white/[0.04] p-3"><Target className="mb-2 text-rose-400" size={18} /><p className="text-xs text-slate-500">Maior despesa</p><strong className="break-words text-lg text-white">{moeda(maiorDespesa)}</strong></div>
+                        <div className="rounded-xl bg-white/[0.04] p-3"><Calculator className="mb-2 text-amber-400" size={18} /><p className="text-xs text-slate-500">Média por despesa</p><strong className="break-words text-lg text-white">{moeda(mediaDespesas)}</strong></div>
+                        <div className="rounded-xl bg-white/[0.04] p-3 sm:col-span-2"><p className="text-xs text-slate-500">Última movimentação</p><strong className="break-words text-sm text-white">{ultimaTransacao ? `${ultimaTransacao.description} · ${moeda(Math.abs(ultimaTransacao.value))}` : "Nenhuma transação cadastrada"}</strong></div>
+                    </div>
+                </section>
+                <BalancoFinanceiro transacoes={transacoes} />
+                
             </div>
             <UltimasTransacoes transacoes={transacoes}/>
         </div>
