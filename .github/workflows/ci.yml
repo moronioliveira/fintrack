@@ -16,6 +16,9 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,5 +35,6 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Build
+      - name: Run build
         run: npm run build
+        
