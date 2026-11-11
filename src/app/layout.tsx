@@ -1,30 +1,35 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
-import { Header } from "@/components/header";
-import { Navigation } from "@/components/header/navigation";
-import { TransactionsProvider } from "@/contexts/transactions-context";
+import { Toaster } from "@/components/ui/toaster";
 
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "FinTrack",
-  description: "Controle suas finanças pessoais com clareza",
+  title: { default: "FinTrack", template: "%s · FinTrack" },
+  description: "Gestão financeira para você e para sua empresa: contas, fluxo de caixa, contas a pagar e receber, orçamentos e relatórios.",
 };
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f7f9" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0f17" },
+  ],
+};
+
+// Aplica o tema antes da pintura para evitar "flash" de tema incorreto.
+const themeScript = `(function(){try{var t=localStorage.getItem('fintrack-theme');if(!t){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.dataset.theme=t}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-br">
-      <body className="min-h-screen w-full">
-        <TransactionsProvider>
-          <Header />
-          <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-4 py-6 sm:px-6 lg:flex-row lg:gap-10 lg:px-8 lg:py-8">
-            <aside className="shrink-0 lg:w-56">
-              <Navigation />
-            </aside>
-            <main className="min-w-0 flex-1">
-              {children}
-            </main>
-          </div>
-        </TransactionsProvider>
+    <html lang="pt-BR" className={inter.variable} suppressHydrationWarning>
+      <body className="min-h-screen font-sans">
+        {children}
+        <Toaster />
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeScript}
+        </Script>
       </body>
     </html>
   );
