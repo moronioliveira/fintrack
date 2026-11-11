@@ -1,38 +1,32 @@
-import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { SESSION_COOKIE, SESSION_MAX_AGE, WORKSPACE_COOKIE, signSession, verifySession } from "./jwt";
 
-const COOKIE_NAME = "fintrack_session";
-const secret = new TextEncoder().encode(
-  process.env.SESSION_SECRET ?? "development-only-fintrack-secret-change-me",
-);
+const cookieOptions = {
+  httpOnly: true,
+  sameSite: "lax" as const,
+  secure: process.env.NODE_ENV === "production",
+  path: "/",
+};
 
 export async function createSession(userId: string) {
-  const token = await new SignJWT({ userId })
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime("7d")
-    .sign(secret);
-  const cookieStore = await cookies();
-  cookieStore.set(COOKIE_NAME, token, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 * 7,
-    path: "/",
-  });
+  const token = await signSession(userId);
+  (await cookies()).set(SESSION_COOKIE, token, { ...cookieOptions, maxAge: SESSION_MAX_AGE });
 }
 
 export async function getSessionUserId() {
-  const token = (await cookies()).get(COOKIE_NAME)?.value;
-  if (!token) return null;
-  try {
-    const { payload } = await jwtVerify(token, secret);
-    return typeof payload.userId === "string" ? payload.userId : null;
-  } catch {
-    return null;
-  }
+  return verifySession((await cookies()).get(SESSION_COOKIE)?.value);
 }
 
 export async function destroySession() {
-  (await cookies()).delete(COOKIE_NAME);
+  const store = await cookies();
+  store.delete(SESSION_COOKIE);
+  store.delete(WORKSPACE_COOKIE);
+}
+
+export async function getActiveWorkspaceCookie() {
+  return (await cookies()).get(WORKSPACE_COOKIE)?.value ?? null;
+}
+
+export async function setActiveWorkspaceCookie(workspaceId: string) {
+  (await cookies()).set(WORKSPACE_COOKIE, workspaceId, { ...cookieOptions, maxAge: 60 * 60 * 24 * 365 });
 }
