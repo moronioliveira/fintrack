@@ -1,4 +1,4 @@
-import { LogoMark } from "@/components/brand/logo";
+import { LogoMark, MadeBySolid } from "@/components/brand/logo";
 
 // Amostra estática de extrato: mostra o produto em vez de ilustrações genéricas.
 const SAMPLE = [
@@ -50,7 +50,10 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
           </div>
         </div>
 
-        <p className="text-xs text-slate-500">Dados de exemplo.</p>
+        <div className="flex items-center justify-between text-xs text-slate-500">
+          <p>Dados de exemplo.</p>
+          <MadeBySolid className="!text-slate-500 hover:!text-slate-300 [&>span]:!text-slate-200" />
+        </div>
       </div>
 
       <div className="flex items-center justify-center px-4 py-12 sm:px-8">
@@ -60,6 +63,9 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
             <span className="text-lg tracking-tight"><span className="font-semibold">fin</span><span className="text-muted">track</span></span>
           </div>
           {children}
+          <div className="mt-10 flex justify-center lg:hidden">
+            <MadeBySolid />
+          </div>
         </div>
       </div>
     </div>

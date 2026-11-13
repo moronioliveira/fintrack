@@ -26,3 +26,22 @@ export function Logo({ href = "/", className = "" }: { href?: string; className?
     </Link>
   );
 }
+
+export const SOLID_URL = "https://www.instagram.com/solidsolutionsdigital/";
+
+/** Assinatura discreta: o FinTrack é um produto da Solid Solutions. */
+export function MadeBySolid({ className = "" }: { className?: string }) {
+  return (
+    <a
+      href={SOLID_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex items-center gap-1 text-[11px] text-muted transition hover:text-fg ${className}`}
+    >
+      Um produto
+      <span className="font-semibold tracking-wide text-fg">
+        SOLID <span className="text-[#FF6B00]">SOLUTIONS</span>
+      </span>
+    </a>
+  );
+}

@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: { default: "FinTrack", template: "%s · FinTrack" },
   description: "Gestão financeira para você e para sua empresa: contas, fluxo de caixa, contas a pagar e receber, orçamentos e relatórios.",
   applicationName: "FinTrack",
+  creator: "Solid Solutions",
+  publisher: "Solid Solutions",
+  authors: [{ name: "Solid Solutions", url: "https://www.instagram.com/solidsolutionsdigital/" }],
   appleWebApp: { capable: true, title: "FinTrack", statusBarStyle: "default" },
   formatDetection: { telephone: false },
 };

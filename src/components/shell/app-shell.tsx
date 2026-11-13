@@ -4,7 +4,7 @@ import { useCallback, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogOut, Menu, Plus, Search, Settings, X } from "lucide-react";
-import { Logo } from "@/components/brand/logo";
+import { Logo, MadeBySolid } from "@/components/brand/logo";
 import { logoutAction } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
 import { TransactionDialog } from "@/components/transactions/transaction-form";
@@ -86,6 +86,9 @@ export function AppShell({ children, user, workspace, workspaces, options }: Pro
       <WorkspaceSwitcher current={workspace} workspaces={workspaces} />
       <div className="-mx-1 flex-1 overflow-y-auto px-1">
         <Nav isBusiness={isBusiness} onNavigate={() => setDrawer(false)} />
+      </div>
+      <div className="border-t border-border pt-3">
+        <MadeBySolid className="px-1" />
       </div>
     </div>
   );
