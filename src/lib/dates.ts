@@ -20,7 +20,10 @@ export function toISO(date: Date) {
 }
 
 export function isValidISODate(value: string) {
-  return /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(toDate(value).getTime());
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = toDate(value);
+  // O JavaScript "rola" datas impossíveis (31/02 vira 03/03); só aceita se a data voltar idêntica.
+  return !Number.isNaN(date.getTime()) && toISO(date) === value;
 }
 
 export function isValidMonth(value: string | undefined | null): value is string {

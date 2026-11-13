@@ -20,13 +20,14 @@ export function formatPercent(value: number, digits = 0) {
   return `${value.toLocaleString("pt-BR", { maximumFractionDigits: digits, minimumFractionDigits: digits })}%`;
 }
 
-/** Converte "1.234,56", "1234.56" ou "-R$ 10,00" em número. */
+/** Converte "1.234,56", "1.500", "1234.56" ou "-R$ 10,00" em número. */
 export function parseMoney(input: string) {
   let v = input.replace(/[^\d,.-]/g, "");
   if (!v) return NaN;
   const lastComma = v.lastIndexOf(",");
   const lastDot = v.lastIndexOf(".");
   if (lastComma > lastDot) v = v.replace(/\./g, "").replace(",", ".");
+  else if (lastComma < 0 && /^-?\d{1,3}(\.\d{3})+$/.test(v)) v = v.replace(/\./g, ""); // "1.500" = mil e quinhentos
   else v = v.replace(/,/g, "");
   return Number(v);
 }
