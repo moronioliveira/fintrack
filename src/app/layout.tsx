@@ -3,12 +3,16 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { PwaRegister } from "@/components/pwa/pwa-register";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
   title: { default: "FinTrack", template: "%s · FinTrack" },
   description: "Gestão financeira para você e para sua empresa: contas, fluxo de caixa, contas a pagar e receber, orçamentos e relatórios.",
+  applicationName: "FinTrack",
+  appleWebApp: { capable: true, title: "FinTrack", statusBarStyle: "default" },
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {
@@ -27,6 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-screen font-sans">
         {children}
         <Toaster />
+        <PwaRegister />
         <Script id="theme-init" strategy="beforeInteractive">
           {themeScript}
         </Script>
