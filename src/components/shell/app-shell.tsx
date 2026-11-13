@@ -13,6 +13,7 @@ import type { FormOptions } from "@/lib/options";
 import { ROLE_LABELS } from "@/lib/constants";
 import { Nav } from "./nav";
 import { ThemeToggle } from "./theme-toggle";
+import { InstallButton } from "@/components/pwa/install-button";
 import { CommandPalette } from "./command-palette";
 import { useClickOutside, WorkspaceSwitcher } from "./workspace-switcher";
 
@@ -120,6 +121,7 @@ export function AppShell({ children, user, workspace, workspaces, options }: Pro
               <span className="hidden sm:inline">Novo lançamento</span>
             </Button>
           )}
+          <InstallButton />
           <ThemeToggle />
           <UserMenu user={user} role={workspace.role} />
         </div>
