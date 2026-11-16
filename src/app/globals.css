@@ -3,53 +3,57 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
+  /* Tema claro na identidade Solid Solutions: neutros quentes + âmbar */
   color-scheme: light;
-  --bg: #f6f7f9;
-  --surface: #ffffff;
-  --surface-2: #f1f3f6;
-  --border: #e4e7ec;
-  --fg: #0f172a;
-  --muted: #64748b;
-  --primary: #4f46e5;
-  --primary-fg: #ffffff;
-  --primary-soft: #eef2ff;
-  --success: #059669;
-  --success-soft: #ecfdf5;
-  --danger: #dc2626;
-  --danger-soft: #fef2f2;
-  --warning: #d97706;
-  --warning-soft: #fffbeb;
-  --ring: rgb(79 70 229 / 0.35);
-  --shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 3px rgb(15 23 42 / 0.06);
-  --chart-income: #0d9488;
-  --chart-expense: #e11d48;
-  --chart-grid: #eef0f3;
-  --logo-accent: #0d9488;
+  --bg: oklch(0.975 0.003 80);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.955 0.004 80);
+  --border: oklch(0.9 0.004 80);
+  --fg: oklch(0.18 0.004 80);
+  --muted: oklch(0.5 0.006 80);
+  --primary: oklch(0.6 0.17 50);
+  --primary-fg: oklch(0.16 0.01 62);
+  --primary-soft: oklch(0.76 0.177 62 / 0.14);
+  --accent: oklch(0.76 0.177 62);
+  --success: oklch(0.55 0.13 155);
+  --success-soft: oklch(0.55 0.13 155 / 0.1);
+  --danger: oklch(0.55 0.2 27);
+  --danger-soft: oklch(0.55 0.2 27 / 0.09);
+  --warning: oklch(0.6 0.14 75);
+  --warning-soft: oklch(0.8 0.15 85 / 0.16);
+  --ring: oklch(0.76 0.177 62 / 0.35);
+  --shadow: 0 1px 2px oklch(0.18 0.004 80 / 0.05), 0 1px 3px oklch(0.18 0.004 80 / 0.06);
+  --chart-income: oklch(0.62 0.13 160);
+  --chart-expense: oklch(0.62 0.2 27);
+  --chart-grid: oklch(0.93 0.004 80);
+  --logo-accent: oklch(0.82 0.16 85);
 }
 
 [data-theme="dark"] {
+  /* Tema escuro (padrão da marca): preto e grafite quentes + âmbar */
   color-scheme: dark;
-  --bg: #0b0f17;
-  --surface: #121826;
-  --surface-2: #1a2232;
-  --border: #243044;
-  --fg: #e8ecf3;
-  --muted: #8b97ab;
-  --primary: #818cf8;
-  --primary-fg: #0b0f17;
-  --primary-soft: rgb(129 140 248 / 0.14);
-  --success: #34d399;
-  --success-soft: rgb(52 211 153 / 0.12);
-  --danger: #f87171;
-  --danger-soft: rgb(248 113 113 / 0.12);
-  --warning: #fbbf24;
-  --warning-soft: rgb(251 191 36 / 0.12);
-  --ring: rgb(129 140 248 / 0.4);
-  --shadow: 0 1px 2px rgb(0 0 0 / 0.3);
-  --chart-income: #0d9488;
-  --chart-expense: #f43f5e;
-  --chart-grid: #1e2738;
-  --logo-accent: #2dd4bf;
+  --bg: oklch(0.145 0.002 80);
+  --surface: oklch(0.18 0.002 80);
+  --surface-2: oklch(0.225 0.002 80);
+  --border: oklch(0.29 0.002 80);
+  --fg: oklch(0.97 0.003 80);
+  --muted: oklch(0.65 0.003 80);
+  --primary: oklch(0.76 0.177 62);
+  --primary-fg: oklch(0.16 0.01 62);
+  --primary-soft: oklch(0.76 0.177 62 / 0.12);
+  --accent: oklch(0.76 0.177 62);
+  --success: oklch(0.78 0.15 155);
+  --success-soft: oklch(0.78 0.15 155 / 0.12);
+  --danger: oklch(0.7 0.17 25);
+  --danger-soft: oklch(0.7 0.17 25 / 0.12);
+  --warning: oklch(0.87 0.16 90);
+  --warning-soft: oklch(0.87 0.16 90 / 0.12);
+  --ring: oklch(0.76 0.177 62 / 0.4);
+  --shadow: 0 1px 2px oklch(0 0 0 / 0.35);
+  --chart-income: oklch(0.74 0.13 160);
+  --chart-expense: oklch(0.68 0.18 25);
+  --chart-grid: oklch(0.24 0.002 80);
+  --logo-accent: oklch(0.87 0.16 90);
 }
 
 @theme inline {
@@ -68,7 +72,10 @@
   --color-danger-soft: var(--danger-soft);
   --color-warning: var(--warning);
   --color-warning-soft: var(--warning-soft);
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-accent: var(--accent);
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   --shadow-card: var(--shadow);
 }
 
@@ -84,7 +91,6 @@ html {
 body {
   background: var(--bg);
   color: var(--fg);
-  font-feature-settings: "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
 }
 
@@ -106,12 +112,30 @@ button:not(:disabled),
   outline-offset: 2px;
 }
 
+/* Títulos na fonte de display da marca (Space Grotesk) */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Rótulo técnico em caixa alta, como no site da Solid Solutions */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .tabular {
   font-variant-numeric: tabular-nums;
 }
 
 dialog::backdrop {
-  background: rgb(2 6 23 / 0.55);
+  background: oklch(0.1 0.002 80 / 0.6);
   backdrop-filter: blur(2px);
 }
 

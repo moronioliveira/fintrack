@@ -17,7 +17,7 @@ export async function saveAccount(_: ActionState, form: FormData) {
     const data = {
       name: str(form, "name", { required: "Informe o nome da conta.", max: 60 }),
       type,
-      color: str(form, "color") || "#6366f1",
+      color: str(form, "color") || "#fe9200",
       initialBalance: money(form, "initialBalance", { allowZero: true, allowNegative: true, label: "Saldo inicial" }),
       creditLimit: type === "CREDIT_CARD" && String(form.get("creditLimit") ?? "").trim()
         ? money(form, "creditLimit", { allowZero: true, label: "Limite" })

@@ -3,7 +3,7 @@ import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTML
 const width = (className: string) => (/(^|\s)(sm:|md:|lg:)?w-/.test(className) ? "" : "w-full");
 
 const control =
-  "rounded-lg border border-border bg-surface px-3 text-sm text-fg placeholder:text-muted/70 transition focus:border-primary focus:outline-none focus:ring-4 focus:ring-[var(--ring)] disabled:opacity-60";
+  "rounded-md border border-border bg-surface px-3 text-sm text-fg placeholder:text-muted/70 transition focus:border-primary focus:outline-none focus:ring-4 focus:ring-[var(--ring)] disabled:opacity-60";
 
 export function Input({ className = "", ...props }: InputHTMLAttributes<HTMLInputElement>) {
   return <input className={`${control} ${width(className)} h-10 ${className}`} {...props} />;

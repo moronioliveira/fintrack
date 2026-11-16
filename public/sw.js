@@ -2,7 +2,7 @@
 // Dados financeiros sempre vêm da rede (nada de páginas com saldos em cache).
 // Só os arquivos estáticos versionados do Next e os ícones são guardados,
 // e uma página "sem conexão" aparece quando a rede cai.
-const CACHE = "fintrack-v1";
+const CACHE = "fintrack-v2";
 const OFFLINE_URL = "/offline.html";
 const PRECACHE = [OFFLINE_URL, "/icon-192.png", "/icon-512.png"];
 
