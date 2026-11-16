@@ -10,7 +10,7 @@ export function LogoMark({ className = "size-7" }: { className?: string }) {
       <rect x="3" y="3" width="4.5" height="18" rx="1.6" fill="currentColor" />
       <rect x="3" y="3" width="17" height="4.5" rx="1.6" fill="currentColor" />
       <rect x="3" y="10.5" width="10.5" height="4" rx="1.6" fill="currentColor" opacity="0.55" />
-      <circle cx="18" cy="12.5" r="2.25" fill="var(--logo-accent, #0d9488)" />
+      <circle cx="18" cy="12.5" r="2.25" fill="var(--logo-accent, #ffd700)" />
     </svg>
   );
 }
@@ -19,9 +19,9 @@ export function Logo({ href = "/", className = "" }: { href?: string; className?
   return (
     <Link href={href} className={`flex items-center gap-2 text-fg ${className}`} aria-label="FinTrack, ir para a visão geral">
       <LogoMark className="size-6 text-primary" />
-      <span className="text-[17px] tracking-tight">
-        <span className="font-semibold">fin</span>
-        <span className="font-normal text-muted">track</span>
+      <span className="font-display text-[17px] tracking-tight">
+        <span className="font-semibold">Fin</span>
+        <span className="font-normal text-muted">Track</span>
       </span>
     </Link>
   );
@@ -39,8 +39,8 @@ export function MadeBySolid({ className = "" }: { className?: string }) {
       className={`inline-flex items-center gap-1 text-[11px] text-muted transition hover:text-fg ${className}`}
     >
       Um produto
-      <span className="font-semibold tracking-wide text-fg">
-        SOLID <span className="text-[#FF6B00]">SOLUTIONS</span>
+      <span className="font-display font-semibold tracking-wide text-fg">
+        SOLID <span className="text-accent">SOLUTIONS</span>
       </span>
     </a>
   );

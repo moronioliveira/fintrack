@@ -26,9 +26,9 @@ export async function createWorkspace(
       accounts: {
         create:
           input.type === "BUSINESS"
-            ? [{ name: "Conta empresarial", type: "CHECKING", color: "#6366f1" }]
+            ? [{ name: "Conta empresarial", type: "CHECKING", color: "#fe9200" }]
             : [
-                { name: "Conta corrente", type: "CHECKING", color: "#6366f1" },
+                { name: "Conta corrente", type: "CHECKING", color: "#fe9200" },
                 { name: "Carteira", type: "CASH", color: "#10b981" },
               ],
       },

@@ -79,7 +79,7 @@ export default async function DashboardPage({ searchParams }: PageProps<"/">) {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm text-muted">{workspace.name} · {firstName}</p>
+          <p className="eyebrow flex items-center gap-2 text-muted"><span className="size-1.5 rounded-full bg-accent" />{workspace.name} · {firstName}</p>
           <h1 className="text-2xl font-semibold tracking-tight">Visão geral</h1>
         </div>
         <MonthPicker month={month} basePath="/" />
